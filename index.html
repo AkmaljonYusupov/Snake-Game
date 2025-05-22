@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ilon o‘yini</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="./style.css">
+ </head>
+<body>
+   <!-- Offcanvas: Sozlamalar menyusini ko‘rsatish uchun yon panel -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="settingsOffcanvas" aria-labelledby="settingsOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="settingsOffcanvasLabel"></h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="select-container">
+        <!-- Sozlamalar: Qiyinchilik, o‘yin rejimi, devor rejimi, rang va til tanlash -->
+        <select id="difficulty" class="form-select difficulty-select">
+          <option value="easy">Oson</option>
+          <option value="medium" selected>O‘rta</option>
+          <option value="hard">Qiyin</option>
+        </select>
+        <select id="gameMode" class="form-select mode-select">
+          <option value="classic" selected>Klassik</option>
+          <option value="endless">Cheksiz</option>
+        </select>
+        <select id="wallMode" class="form-select wall-mode-select">
+          <option value="open" selected>Devor ochiq</option>
+          <option value="closed">Devor yopiq</option>
+        </select>
+        <select id="snakeColor" class="form-select color-select">
+          <option value="0" selected>Yashil</option>
+          <option value="1">Ko‘k</option>
+          <option value="2">Sariq</option>
+        </select>
+        <select id="languageSelect" class="form-select language-select">
+          <option value="uz" selected><img src="https://flagcdn.com/uz.svg" class="flag-icon" alt="Uzbekistan Flag"> O‘zbek</option>
+          <option value="en"><img src="https://flagcdn.com/gb.svg" class="flag-icon" alt="UK Flag"> English</option>
+          <option value="ru"><img src="https://flagcdn.com/ru.svg" class="flag-icon" alt="Russia Flag"> Русский</option>
+          <option value="tr"><img src="https://flagcdn.com/tr.svg" class="flag-icon" alt="Turkey Flag"> Türkçe</option>
+        </select>
+        <select id="wallAction" class="form-select wall-action-select">
+          <option value="none" selected>Amal tanlang</option>
+          <option value="addWall">To‘siq qo‘yish</option>
+          <option value="removeWall">To‘siq olib tashlash</option>
+        </select>
+      </div>
+      <div class="instructions-box">
+        <i class="fas fa-info-circle"></i> <p id="instructions">Ilonni boshqarish uchun suring yoki klaviaturadagi o‘q tugmalarini bosing</p>
+      </div>
+      <div class="stats-box">
+        <i class="fas fa-chart-line"></i> <p id="statsText">Umumiy vaqt: 0s | Umumiy ball: 0 | O‘rtacha bosqich: 0</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Asosiy o‘yin maydoni: Ball, bosqich va boshqaruv elementlari -->
+  <div class="container mx-auto" style="position: relative; z-index: 2;">
+    <div class="text-center mb-2">
+      <h1 id="gameTitle" class="font-bold text-uppercase mb-2">Ilon o‘yini</h1>
+    </div>
+    <div class="score-display">
+      <span id="scoreText">Ball: 0</span>
+      <span id="levelText">Bosqich: 1</span>
+      <span id="highScoreText">Eng yuqori ball: 0</span>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <div class="control-buttons d-flex mt-2">
+      <button id="startBtn" class="btn btn-primary"><i class="fas fa-play"></i> O‘yinni boshlash</button>
+      <button id="pauseBtn" class="btn btn-secondary" disabled><i class="fas fa-pause"></i> Pauza</button>
+    </div>
+    <div class="settings-toggle" data-bs-toggle="offcanvas" data-bs-target="#settingsOffcanvas" aria-controls="settingsOffcanvas">
+      ⚙️
+    </div>
+  </div>
+
+  <!-- Footer: Sahifa pastki qismi, aloqa ma'lumotlari -->
+  <footer id="footer">
+    <p>© <span id="currentDate"></span> | <a href="https://t.me/AkmaljonYusupov" target="_blank"><i class="fab fa-telegram-plane"></i> AkmaljonYusupov</a> | <a href="tel:+998885700209"><i class="fas fa-phone"></i> +998 88 570 02 09</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
