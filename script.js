@@ -220,7 +220,7 @@ let totalLevels = localStorage.getItem('totalLevels')
 let gameCount = localStorage.getItem('gameCount')
 	? parseInt(localStorage.getItem('gameCount'))
 	: 0 // O‘ynalgan o‘yinlar soni
-let baseGameSpeed = 140 // O‘yin tezligining asosiy qiymati (sekinlashtirilgan)
+let baseGameSpeed = 160 // O‘yin tezligining asosiy qiymati (sekinlashtirilgan)
 let gameSpeed = baseGameSpeed // Joriy o‘yin tezligi
 let gameLoop // O‘yin tsiklini boshqaruvchi interval
 let isPaused = false // O‘yin pauza holatida yoki yo‘qligi
@@ -318,17 +318,17 @@ function setDifficulty() {
 	const difficulty = difficultySelect.value
 	switch (difficulty) {
 		case 'easy':
-			baseGameSpeed = 200 // Sekinroq tezlik
+			baseGameSpeed = 220 // Sekinroq tezlik
 			break
 		case 'medium':
-			baseGameSpeed = 140 // Sekinroq tezlik
+			baseGameSpeed = 160 // Sekinroq tezlik
 			break
 		case 'hard':
-			baseGameSpeed = 80 // Sekinroq tezlik
+			baseGameSpeed = 100 // Sekinroq tezlik
 			break
 	}
 	gameSpeed = baseGameSpeed * Math.pow(0.9, speedLevel - 1)
-	if (!isPaused) {
+	if (!isPaused && !isGameOver) {
 		clearInterval(gameLoop)
 		gameLoop = setInterval(gameUpdate, gameSpeed)
 	}
@@ -455,7 +455,7 @@ function startGame() {
 	score = 0
 	level = 1
 	speedLevel = 1
-	baseGameSpeed = 140 // Sekinroq tezlik
+	baseGameSpeed = 160 // Sekinroq tezlik
 	setDifficulty()
 	gameSpeed = baseGameSpeed
 	isPaused = false
@@ -489,7 +489,7 @@ function pauseGame() {
 	} else {
 		isPaused = false
 		applySettingsDuringPause()
-		gameLoop = setInterval(gameUpdate, gameSpeed)
+		gameLoop = setInterval(gameUpdate, gameSpeed) // Joriy gameSpeed bilan davom etadi
 		pauseBtn.innerHTML = `<i class="fas fa-pause"></i> ${translations[currentLanguage].pauseBtn}`
 	}
 }
@@ -499,7 +499,6 @@ function applySettingsDuringPause() {
 	gameMode = gameModeSelect.value
 	wallMode = wallModeSelect.value
 	colorIndex = parseInt(snakeColorSelect.value)
-	setDifficulty()
 	drawGame()
 }
 
